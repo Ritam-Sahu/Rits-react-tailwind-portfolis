@@ -1,16 +1,88 @@
-# React + Vite
+# 🚀 Personal Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![Vite](https://img.shields.io/badge/Vite-5-purple?logo=vite)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-38bdf8?logo=tailwindcss)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
-Currently, two official plugins are available:
+A **modern, responsive developer portfolio** built with **React, Vite, and Tailwind CSS**, featuring smooth animations, dark/light mode, and interactive UI effects.  
+Designed to showcase projects, skills, and contact details in a clean, professional way.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌐 **Live Demo:** *(add your deployed link here)*  
+📂 **Repository:** https://github.com/Ritam-Sahu
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🌗 **Dark / Light Mode** (persisted with `localStorage`)
+- 🌌 **Animated Star Background**
+  - Parallax effect (mouse-based depth)
+  - Random meteor animations
+- 🧭 **Responsive Navbar**
+  - Scroll-based blur effect
+  - Mobile-friendly menu
+- 🧠 **Skills Section**
+  - Category-based filtering
+  - Animated progress bars
+- 🎴 **Projects Section**
+  - Hover overlay reveal
+  - GitHub & live demo links
+- 📩 **Contact Section**
+  - Toast notifications
+  - Loading state handling
+- ⚡ **Fast & Optimized**
+  - Vite-powered build
+  - Clean component architecture
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, Vite
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **Routing:** React Router DOM
+- **UI Utilities:** shadcn/ui (Toast)
+- **State Management:** React Hooks
+
+---
+
+✨ Features
+
+🌗 Dark / Light Mode
+Theme toggle with preference saved in localStorage for a consistent user experience.
+
+🌌 Animated Star Background
+Interactive parallax stars with random meteor animations for a dynamic, premium feel.
+
+🧭 Responsive Navigation Bar
+Scroll-aware navbar with blur effect and a mobile-friendly hamburger menu.
+
+🧠 Skills Showcase
+Category-based skill filtering (Frontend, Backend, Tools) with animated progress indicators.
+
+🎴 Project Showcase
+Clean project cards with hover overlay reveal and quick access to live demos and source code.
+
+📩 Contact Form with Feedback
+Interactive contact form featuring loading state and toast notifications on submission.
+
+⚡ Fast & Optimized Performance
+Built with Vite for lightning-fast development and optimized production builds.
+
+🎨 Modern UI & Animations
+Subtle hover effects, transitions, and glow animations using Tailwind CSS.
+
+📱 Fully Responsive Design
+Optimized for desktops, tablets, and mobile devices.
+
+## 🔗 Useful Links
+
+- ⚛️ **React Documentation** — https://react.dev  
+- 🎨 **Tailwind CSS Docs** — https://tailwindcss.com/docs  
+- 🧩 **Lucide Icons** — https://lucide.dev  
+- 🧱 **Radix UI** — https://www.radix-ui.com  
+- ⚡ **Vite** — https://vitejs.dev  
+
