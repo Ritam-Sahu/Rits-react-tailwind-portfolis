@@ -1,6 +1,7 @@
-import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
   { name: "Home", href: "#hero" },
@@ -15,12 +16,9 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -28,64 +26,65 @@ export const Navbar = () => {
       className={cn(
         "fixed w-full z-40 transition-all duration-300",
         isScrolled
-          ? "py-3 bg-background/80 backdrop-blur-md shadow-xs"
+          ? "bg-background/80 backdrop-blur-md shadow-sm py-3"
           : "py-5"
       )}
     >
       <div className="container flex items-center justify-between">
-        <a
-          href="#hero"
-          onClick={() => setIsMenuOpen(false)}
-          className="text-xl font-bold text-primary flex items-center"
-        >
-          <span className="relative z-10">
-            <span className="text-glow text-foreground">PedroTech</span>{" "}
-            Portfolio
-          </span>
+        {/* Logo */}
+        <a href="#hero" className="text-xl font-bold">
+          <span className="text-glow">Ritam</span> Portfolio
         </a>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
+              className="text-muted-foreground hover:text-primary transition"
             >
               {item.name}
             </a>
           ))}
+
+          {/* Desktop Theme Toggle */}
+          <ThemeToggle />
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile menu button */}
         <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 text-foreground z-50"
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="md:hidden p-2 z-50"
+          onClick={() => setIsMenuOpen((p) => !p)}
+          aria-label="Toggle menu"
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMenuOpen ? <X /> : <Menu />}
         </button>
 
         {/* Mobile Menu */}
         <div
           className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center transition-all duration-300 md:hidden",
+            "fixed inset-0 bg-background/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 transition md:hidden",
             isMenuOpen
               ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none"
           )}
         >
-          <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-              >
-                {item.name}
-              </a>
-            ))}
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+              className="text-xl text-muted-foreground hover:text-primary"
+            >
+              {item.name}
+            </a>
+          ))}
+
+          {/* Mobile Theme Toggle */}
+          <div className="flex items-center gap-3 pt-4">
+            <span className="text-sm text-muted-foreground">Theme</span>
+            <ThemeToggle />
           </div>
         </div>
       </div>

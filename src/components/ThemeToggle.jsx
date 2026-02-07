@@ -1,42 +1,67 @@
-import { useEffect, useState } from "react"
-import { Sun, Moon } from "lucide-react"
+import { useEffect, useState } from "react";
+import { Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+export default function ThemeToggle({ className }) {
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-export default function ThemeToggle() {
+  const applyTheme = (theme) => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    setIsDarkMode(theme === "dark");
+  };
 
-    const [isDarkMode, setIsDarkMode] = useState(false);
+  // Initial load: saved theme OR system theme
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    const systemDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
 
-    // Load saved theme
-    useEffect(() => {
-        const storedTheme = localStorage.getItem("theme");
+    const theme = storedTheme ?? (systemDark ? "dark" : "light");
+    applyTheme(theme);
+  }, []);
 
-        if (storedTheme === "dark") {
-        document.documentElement.classList.add("dark");
-        setIsDarkMode(true);
-        } else {
-        document.documentElement.classList.remove("dark");
-        setIsDarkMode(false);
-        }
-    }, []);
-
-    const toggleTheme = () => {
-        const newTheme = isDarkMode ? "light" : "dark";
-
-        document.documentElement.classList.toggle("dark", newTheme === "dark");
-        localStorage.setItem("theme", newTheme);
-        setIsDarkMode(!isDarkMode);
+  // Sync across tabs
+  useEffect(() => {
+    const onStorage = (e) => {
+      if (e.key === "theme") applyTheme(e.newValue);
     };
-    
-    return(
-        <>
-            <button onClick={toggleTheme} className={cn("fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300",
-                "focus:outline-none"
-            )}>
-                {isDarkMode ?(<Sun className="h-6 w-6 text-yellow-300"/>
-            ) : (
-                <Moon className="h-6 w-6 text-blue-900"/> )}
-            </button>
-        </>
-    )
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
+  // Live system theme change
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e) => {
+      if (!localStorage.getItem("theme")) {
+        applyTheme(e.matches ? "dark" : "light");
+      }
+    };
+    media.addEventListener("change", handler);
+    return () => media.removeEventListener("change", handler);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = isDarkMode ? "light" : "dark";
+    localStorage.setItem("theme", next);
+    applyTheme(next);
+  };
+
+  return (
+    <button
+      onClick={toggleTheme}
+      aria-label="Toggle theme"
+      className={cn(
+        "p-2 rounded-full transition-colors hover:bg-secondary",
+        className
+      )}
+    >
+      {isDarkMode ? (
+        <Sun className="h-5 w-5 text-yellow-400" />
+      ) : (
+        <Moon className="h-5 w-5 text-blue-500" />
+      )}
+    </button>
+  );
 }
